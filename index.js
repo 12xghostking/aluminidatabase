@@ -4,7 +4,8 @@ const User = require('./User'); // assuming the model is in User.js
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const { JWT } = require("google-auth-library");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+
 const creds = require("./gsheet.json");
 app.use(cors());
 app.use(express.json());
@@ -63,6 +64,6 @@ app.post('/submit', async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`Server is running on port ${port}`);
 });
